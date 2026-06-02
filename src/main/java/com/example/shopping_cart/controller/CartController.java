@@ -2,6 +2,7 @@ package com.example.shopping_cart.controller;
 
 import com.example.shopping_cart.dto.AddItemRequest;
 import com.example.shopping_cart.dto.CreateCartRequest;
+import com.example.shopping_cart.dto.UpdateItemRequest;
 import com.example.shopping_cart.entity.Cart;
 import com.example.shopping_cart.service.CartService;
 import jakarta.validation.Valid;
@@ -59,8 +60,8 @@ public class CartController {
     public ResponseEntity<Cart> updateItemQuantity(
             @PathVariable Long cartId,
             @PathVariable Long itemId,
-            @RequestParam Integer quantity) {
-        Cart updated = cartService.updateItemQuantity(cartId, itemId, quantity);
+            @Valid @RequestBody UpdateItemRequest request) {
+        Cart updated = cartService.updateItemQuantity(cartId, itemId, request.getQuantity());
         return ResponseEntity.ok(updated);
     }
 
